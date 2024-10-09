@@ -52,8 +52,7 @@ func (r *channelRepository) Read(ctx context.Context, channelID string) (*model.
 
 func (r *channelRepository) ReadAll(ctx context.Context) ([]model.Channel, error) {
 	channels := []model.Channel{}
-	rows, err := r.db.Query("SELECT id, channe_name FROM channel ORDER BY id DESC")
-	fmt.Println("read all", rows)
+	rows, err := r.db.Query("SELECT channel_name, create_user_id FROM channel ORDER BY id DESC")
 	if err != nil {
 		return channels, err
 	}
@@ -65,8 +64,6 @@ func (r *channelRepository) ReadAll(ctx context.Context) ([]model.Channel, error
 		}
 		channels = append(channels, channel)
 	}
-
-	fmt.Println("channels", channels)
 
 	return channels, nil
 }
